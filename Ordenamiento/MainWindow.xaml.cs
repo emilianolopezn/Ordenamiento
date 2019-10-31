@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Threading;
 
 namespace Ordenamiento
 {
@@ -51,18 +53,37 @@ namespace Ordenamiento
             {
                 for(i=0; i<miLista.Count; i++)
                 {
-                    if(miLista[i] > miLista[gap + i])
+                    if(gap + i < miLista.Count && miLista[i] > miLista[gap + i])
                     {
                         temp = miLista[i];
                         miLista[i] = miLista[gap + i];
                         miLista[gap + i] = temp;
- 
+                        
                     }
                 }
 
                 gap--;
             }
 
+        }
+
+        private void BtnBubble_Click(object sender, RoutedEventArgs e)
+        {
+            bool intercambio = false;
+            do
+            {
+                intercambio = false;
+                for(int i=0; i<miLista.Count-1; i++)
+                {
+                    if (miLista[i]>miLista[i+1])
+                    {
+                        int temp = miLista[i];
+                        miLista[i] = miLista[i + 1];
+                        miLista[i + 1] = temp;
+                        intercambio = true;
+                    }
+                }
+            } while (intercambio);
         }
     }
 }
