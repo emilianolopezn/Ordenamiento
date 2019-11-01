@@ -25,6 +25,8 @@ namespace Ordenamiento
     {
         ObservableCollection<int> miLista =
             new ObservableCollection<int>();
+        ObservableCollection<Alumno> alumnos =
+            new ObservableCollection<Alumno>();
         public MainWindow()
         {
             InitializeComponent();
@@ -37,7 +39,20 @@ namespace Ordenamiento
             miLista.Add(60);
             miLista.Add(4);
 
-            lstNumeros.ItemsSource = miLista;
+            alumnos.Add(
+                new Alumno("José", 9.1f, 2));
+            alumnos.Add(
+                new Alumno("María", 9.8f, 0));
+            alumnos.Add(
+                new Alumno("Pedro", 6.4f, 14));
+            alumnos.Add(
+                new Alumno("Ana", 8.5f, 4));
+            alumnos.Add(
+                new Alumno("Juan", 9.5f, 1));
+
+            lstNumeros.ItemsSource = alumnos;
+
+            //lstNumeros.ItemsSource = miLista;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -46,18 +61,19 @@ namespace Ordenamiento
             miLista[0] = miLista[3];
             miLista[3] = temp;*/
 
-            int gap, temp, i, j;
-            gap = miLista.Count / 2;
+            int gap, i, j;
+            gap = alumnos.Count / 2;
 
             while(gap > 0)
             {
-                for(i=0; i<miLista.Count; i++)
+                for(i=0; i<alumnos.Count; i++)
                 {
-                    if(gap + i < miLista.Count && miLista[i] > miLista[gap + i])
+                    if(gap + i < alumnos.Count && 
+                        alumnos[i].Promedio > alumnos[gap + i].Promedio)
                     {
-                        temp = miLista[i];
-                        miLista[i] = miLista[gap + i];
-                        miLista[gap + i] = temp;
+                        var temp = alumnos[i];
+                        alumnos[i] = alumnos[gap + i];
+                        alumnos[gap + i] = temp;
                         
                     }
                 }
